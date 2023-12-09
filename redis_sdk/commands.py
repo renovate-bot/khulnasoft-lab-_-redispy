@@ -1,8 +1,8 @@
 import datetime
 from typing import Any, Awaitable, Dict, List, Literal, Mapping, Optional, Tuple, Union
 
-from upstash_redis.typing import FloatMinMaxT, ValueT
-from upstash_redis.utils import (
+from redis_sdk.typing import FloatMinMaxT, ValueT
+from redis_sdk.utils import (
     handle_georadius_write_exceptions,
     handle_geosearch_exceptions,
     handle_non_deprecated_zrange_exceptions,

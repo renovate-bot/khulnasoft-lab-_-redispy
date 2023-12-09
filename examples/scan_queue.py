@@ -1,7 +1,7 @@
 from threading import Thread
 from typing import List, Optional, Tuple
 
-from upstash_redis import Redis
+from redis_sdk import Redis
 
 # A simple task queue for scanning websites
 

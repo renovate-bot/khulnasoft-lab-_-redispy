@@ -3,20 +3,20 @@ from typing import Any, List, Literal, Optional, Type
 
 from requests import Session
 
-from upstash_redis.commands import Commands
-from upstash_redis.format import FORMATTERS
-from upstash_redis.http import make_headers, sync_execute
-from upstash_redis.typing import RESTResultT
+from redis_sdk.commands import Commands
+from redis_sdk.format import FORMATTERS
+from redis_sdk.http import make_headers, sync_execute
+from redis_sdk.typing import RESTResultT
 
 
 class Redis(Commands):
     """
-    A Redis client that uses the Upstash REST API.
+    A Redis client that uses the Khulnasoft REST API.
 
     Blocking example:
 
     ```python
-    from upstash_redis import Redis
+    from redis_sdk import Redis
 
     redis = Redis.from_env()
 
@@ -24,7 +24,7 @@ class Redis(Commands):
     redis.get("key")
     ```
 
-    To use the async client, use `upstash_redis.asyncio.Redis`.
+    To use the async client, use `redis_sdk.asyncio.Redis`.
     """
 
     def __init__(
@@ -39,8 +39,8 @@ class Redis(Commands):
         """
         Creates a new blocking Redis client.
 
-        :param url: UPSTASH_REDIS_REST_URL in the console
-        :param token: UPSTASH_REDIS_REST_TOKEN in the console
+        :param url: REDIS_SDK_REST_URL in the console
+        :param token: REDIS_SDK_REST_TOKEN in the console
         :param rest_encoding: the encoding that can be used by the REST API to parse the response before sending it
         :param rest_retries: how many times an HTTP request will be retried if it fails
         :param rest_retry_interval: how many seconds will be waited between each retry
@@ -77,8 +77,8 @@ class Redis(Commands):
         """
 
         return cls(
-            environ["UPSTASH_REDIS_REST_URL"],
-            environ["UPSTASH_REDIS_REST_TOKEN"],
+            environ["REDIS_SDK_REST_URL"],
+            environ["REDIS_SDK_REST_TOKEN"],
             rest_encoding,
             rest_retries,
             rest_retry_interval,

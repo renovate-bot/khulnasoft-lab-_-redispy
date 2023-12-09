@@ -1,8 +1,8 @@
 import datetime
 from typing import Any, Dict, List, Literal, Mapping, Optional, Tuple, Union
 
-from upstash_redis.typing import FloatMinMaxT, ValueT
-from upstash_redis.utils import GeoSearchResult
+from redis_sdk.typing import FloatMinMaxT, ValueT
+from redis_sdk.utils import GeoSearchResult
 
 class Commands:
     def bitcount(

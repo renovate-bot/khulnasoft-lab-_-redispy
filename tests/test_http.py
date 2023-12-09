@@ -9,9 +9,9 @@ from aiohttp import ClientSession
 from pytest import mark, raises
 from requests import Session
 
-from upstash_redis import __version__
-from upstash_redis.errors import UpstashError
-from upstash_redis.http import async_execute, decode, make_headers, sync_execute
+from redis_sdk import __version__
+from redis_sdk.errors import KhulnasoftError
+from redis_sdk.http import async_execute, decode, make_headers, sync_execute
 
 
 @mark.asyncio
@@ -20,8 +20,8 @@ async def test_async_execute_without_encoding() -> None:
         assert (
             await async_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
-                headers=make_headers(environ["UPSTASH_REDIS_REST_TOKEN"], None, False),
+                url=environ["REDIS_SDK_REST_URL"],
+                headers=make_headers(environ["REDIS_SDK_REST_TOKEN"], None, False),
                 retries=0,
                 retry_interval=0,
                 encoding=None,
@@ -37,9 +37,9 @@ async def test_async_execute_with_encoding() -> None:
         assert (
             await async_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
+                url=environ["REDIS_SDK_REST_URL"],
                 headers=make_headers(
-                    environ["UPSTASH_REDIS_REST_TOKEN"], "base64", False
+                    environ["REDIS_SDK_REST_TOKEN"], "base64", False
                 ),
                 retries=0,
                 retry_interval=0,
@@ -56,9 +56,9 @@ async def test_async_execute_with_encoding_and_object() -> None:
         assert (
             await async_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
+                url=environ["REDIS_SDK_REST_URL"],
                 headers=make_headers(
-                    environ["UPSTASH_REDIS_REST_TOKEN"], "base64", False
+                    environ["REDIS_SDK_REST_TOKEN"], "base64", False
                 ),
                 retries=0,
                 retry_interval=0,
@@ -72,12 +72,12 @@ async def test_async_execute_with_encoding_and_object() -> None:
 @mark.asyncio
 async def test_async_execute_with_invalid_command() -> None:
     async with ClientSession() as session:
-        with raises(UpstashError):
+        with raises(KhulnasoftError):
             await async_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
+                url=environ["REDIS_SDK_REST_URL"],
                 headers=make_headers(
-                    environ["UPSTASH_REDIS_REST_TOKEN"], "base64", False
+                    environ["REDIS_SDK_REST_TOKEN"], "base64", False
                 ),
                 retries=0,
                 retry_interval=0,
@@ -92,8 +92,8 @@ def test_sync_execute_without_encoding() -> None:
         assert (
             sync_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
-                headers=make_headers(environ["UPSTASH_REDIS_REST_TOKEN"], None, False),
+                url=environ["REDIS_SDK_REST_URL"],
+                headers=make_headers(environ["REDIS_SDK_REST_TOKEN"], None, False),
                 retries=0,
                 retry_interval=0,
                 encoding=None,
@@ -108,9 +108,9 @@ def test_sync_execute_with_encoding() -> None:
         assert (
             sync_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
+                url=environ["REDIS_SDK_REST_URL"],
                 headers=make_headers(
-                    environ["UPSTASH_REDIS_REST_TOKEN"], "base64", False
+                    environ["REDIS_SDK_REST_TOKEN"], "base64", False
                 ),
                 retries=0,
                 retry_interval=0,
@@ -126,9 +126,9 @@ def test_sync_execute_with_encoding_and_object() -> None:
         assert (
             sync_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
+                url=environ["REDIS_SDK_REST_URL"],
                 headers=make_headers(
-                    environ["UPSTASH_REDIS_REST_TOKEN"], "base64", False
+                    environ["REDIS_SDK_REST_TOKEN"], "base64", False
                 ),
                 retries=0,
                 retry_interval=0,
@@ -141,12 +141,12 @@ def test_sync_execute_with_encoding_and_object() -> None:
 
 def test_sync_execute_with_invalid_command() -> None:
     with Session() as session:
-        with raises(UpstashError):
+        with raises(KhulnasoftError):
             sync_execute(
                 session=session,
-                url=environ["UPSTASH_REDIS_REST_URL"],
+                url=environ["REDIS_SDK_REST_URL"],
                 headers=make_headers(
-                    environ["UPSTASH_REDIS_REST_TOKEN"], "base64", False
+                    environ["REDIS_SDK_REST_TOKEN"], "base64", False
                 ),
                 retries=0,
                 retry_interval=0,
@@ -181,7 +181,7 @@ def test_decode(arg: Any, expected: Any) -> None:
             "token",
             "base64",
             False,
-            {"Authorization": "Bearer token", "Upstash-Encoding": "base64"},
+            {"Authorization": "Bearer token", "Khulnasoft-Encoding": "base64"},
         ),
         (
             "token",
@@ -189,9 +189,9 @@ def test_decode(arg: Any, expected: Any) -> None:
             True,
             {
                 "Authorization": "Bearer token",
-                "Upstash-Telemetry-Sdk": f"py-upstash-redis@v{__version__}",
-                "Upstash-Telemetry-Runtime": f"python@v{python_version()}",
-                "Upstash-Telemetry-Platform": "unknown",
+                "Khulnasoft-Telemetry-Sdk": f"py-redis-sdk@v{__version__}",
+                "Khulnasoft-Telemetry-Runtime": f"python@v{python_version()}",
+                "Khulnasoft-Telemetry-Platform": "unknown",
             },
         ),
         (
@@ -200,10 +200,10 @@ def test_decode(arg: Any, expected: Any) -> None:
             True,
             {
                 "Authorization": "Bearer token",
-                "Upstash-Encoding": "base64",
-                "Upstash-Telemetry-Sdk": f"py-upstash-redis@v{__version__}",
-                "Upstash-Telemetry-Runtime": f"python@v{python_version()}",
-                "Upstash-Telemetry-Platform": "unknown",
+                "Khulnasoft-Encoding": "base64",
+                "Khulnasoft-Telemetry-Sdk": f"py-redis-sdk@v{__version__}",
+                "Khulnasoft-Telemetry-Runtime": f"python@v{python_version()}",
+                "Khulnasoft-Telemetry-Platform": "unknown",
             },
         ),
     ],
@@ -229,9 +229,9 @@ def test_make_headers_on_vercel() -> None:
     with patch("os.getenv", side_effect=lambda arg: arg if arg == "VERCEL" else None):
         assert make_headers("token", None, True) == {
             "Authorization": "Bearer token",
-            "Upstash-Telemetry-Sdk": f"py-upstash-redis@v{__version__}",
-            "Upstash-Telemetry-Runtime": f"python@v{python_version()}",
-            "Upstash-Telemetry-Platform": "vercel",
+            "Khulnasoft-Telemetry-Sdk": f"py-redis-sdk@v{__version__}",
+            "Khulnasoft-Telemetry-Runtime": f"python@v{python_version()}",
+            "Khulnasoft-Telemetry-Platform": "vercel",
         }
 
 
@@ -241,9 +241,9 @@ def test_make_headers_on_aws() -> None:
     ):
         assert make_headers("token", None, True) == {
             "Authorization": "Bearer token",
-            "Upstash-Telemetry-Sdk": f"py-upstash-redis@v{__version__}",
-            "Upstash-Telemetry-Runtime": f"python@v{python_version()}",
-            "Upstash-Telemetry-Platform": "aws",
+            "Khulnasoft-Telemetry-Sdk": f"py-redis-sdk@v{__version__}",
+            "Khulnasoft-Telemetry-Runtime": f"python@v{python_version()}",
+            "Khulnasoft-Telemetry-Platform": "aws",
         }
 
 
@@ -265,7 +265,7 @@ def test_sync_execute_no_retry_on_error_response_from_server() -> None:
     response.json = MagicMock(return_value={"error": "expected error"})
     session.post = MagicMock(return_value=response)
 
-    with raises(UpstashError) as e:
+    with raises(KhulnasoftError) as e:
         sync_execute(session, "", {}, None, 100, 0, [])
 
     assert str(e.value) == "expected error"
@@ -312,7 +312,7 @@ async def test_async_execute_no_retry_on_error_response_from_server() -> None:
     session.post = MagicMock(return_value=response)
     response.__aenter__.return_value = response
 
-    with raises(UpstashError) as e:
+    with raises(KhulnasoftError) as e:
         await async_execute(session, "", {}, None, 100, 0, [])
 
     assert str(e.value) == "expected error"

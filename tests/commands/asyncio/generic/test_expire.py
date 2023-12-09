@@ -4,7 +4,7 @@ from asyncio import sleep
 from pytest import mark
 
 from tests.execute_on_http import execute_on_http
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 
 
 @mark.asyncio

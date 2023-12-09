@@ -1,6 +1,6 @@
 import pytest
 
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 
 
 @pytest.fixture(autouse=True)

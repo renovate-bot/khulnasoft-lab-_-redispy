@@ -1,6 +1,6 @@
 from typing import Callable, Dict, List, Literal, Optional, Tuple, Union
 
-from upstash_redis.utils import GeoSearchResult
+from redis_sdk.utils import GeoSearchResult
 
 
 def list_to_dict(raw: List, command=None) -> Dict:

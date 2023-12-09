@@ -1,4 +1,4 @@
-from upstash_redis.format import (
+from redis_sdk.format import (
     format_bool_list,
     format_float_list,
     format_geo_search_result,
@@ -6,7 +6,7 @@ from upstash_redis.format import (
     format_time,
     list_to_dict,
 )
-from upstash_redis.utils import GeoSearchResult
+from redis_sdk.utils import GeoSearchResult
 
 
 def test_list_to_dict() -> None:

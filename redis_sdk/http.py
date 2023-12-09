@@ -9,9 +9,9 @@ from typing import Any, Dict, List, Literal, Optional
 from aiohttp import ClientSession
 from requests import Session
 
-from upstash_redis import __version__
-from upstash_redis.errors import UpstashError
-from upstash_redis.typing import RESTResultT
+from redis_sdk import __version__
+from redis_sdk.errors import KhulnasoftError
+from redis_sdk.typing import RESTResultT
 
 
 def make_headers(
@@ -22,11 +22,11 @@ def make_headers(
     }
 
     if encoding == "base64":
-        headers["Upstash-Encoding"] = encoding
+        headers["Khulnasoft-Encoding"] = encoding
 
     if allow_telemetry:
-        headers["Upstash-Telemetry-Sdk"] = f"py-upstash-redis@v{__version__}"
-        headers["Upstash-Telemetry-Runtime"] = f"python@v{python_version()}"
+        headers["Khulnasoft-Telemetry-Sdk"] = f"py-redis-sdk@v{__version__}"
+        headers["Khulnasoft-Telemetry-Runtime"] = f"python@v{python_version()}"
 
         if os.getenv("VERCEL"):
             platform = "vercel"
@@ -35,7 +35,7 @@ def make_headers(
         else:
             platform = "unknown"
 
-        headers["Upstash-Telemetry-Platform"] = platform
+        headers["Khulnasoft-Telemetry-Platform"] = platform
 
     return headers
 
@@ -91,7 +91,7 @@ async def async_execute(
         raise last_error
 
     if response.get("error"):
-        raise UpstashError(response["error"])
+        raise KhulnasoftError(response["error"])
 
     result = response["result"]
 
@@ -141,7 +141,7 @@ def sync_execute(
         raise last_error
 
     if response.get("error"):
-        raise UpstashError(response["error"])
+        raise KhulnasoftError(response["error"])
 
     result = response["result"]
 
@@ -167,4 +167,4 @@ def decode(raw: RESTResultT) -> RESTResultT:
             for element in raw
         ]
     else:
-        raise UpstashError(f"Error decoding data for result type {str(type(raw))}")
+        raise KhulnasoftError(f"Error decoding data for result type {str(type(raw))}")

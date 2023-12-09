@@ -1,6 +1,6 @@
 from pytest import mark
 
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 
 
 @mark.asyncio

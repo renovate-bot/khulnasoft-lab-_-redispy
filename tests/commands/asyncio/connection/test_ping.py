@@ -1,6 +1,6 @@
 from pytest import mark
 
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 
 
 @mark.asyncio
@@ -10,4 +10,4 @@ async def test(async_redis: Redis) -> None:
 
 @mark.asyncio
 async def test_with_message(async_redis: Redis) -> None:
-    assert await async_redis.ping(message="Upstash is nice!") == "Upstash is nice!"
+    assert await async_redis.ping(message="Khulnasoft is nice!") == "Khulnasoft is nice!"

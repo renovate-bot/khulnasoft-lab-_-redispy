@@ -2,7 +2,7 @@ import datetime
 import json
 from uuid import uuid4
 
-from upstash_redis import Redis
+from redis_sdk import Redis
 
 # A simple twitter clone in redis
 

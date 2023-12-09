@@ -1,6 +1,6 @@
 from typing import List
 
-from upstash_redis import Redis
+from redis_sdk import Redis
 
 # An example chat history model for storing
 # messages of different users with the chatbot

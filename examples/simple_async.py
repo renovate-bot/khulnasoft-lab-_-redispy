@@ -1,12 +1,12 @@
 import asyncio
 
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 
 
 async def main():
     # Reads from the environment variables
-    # UPSTASH_REDIS_REST_URL
-    # UPSTASH_REDIS_REST_TOKEN
+    # REDIS_SDK_REST_URL
+    # REDIS_SDK_REST_TOKEN
     redis = Redis.from_env()
 
     # Set or get a key

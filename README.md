@@ -1,19 +1,19 @@
-# Upstash Redis Python SDK
+# Khulnasoft Redis Python SDK
 
-upstash-redis is a connectionless, HTTP-based Redis client for Python, designed to be used in serverless and serverful environments such as:
+redis-sdk is a connectionless, HTTP-based Redis client for Python, designed to be used in serverless and serverful environments such as:
 - AWS Lambda
 - Vercel Serverless
 - Google Cloud Functions
 - and other environments where HTTP is preferred over TCP.
 
-Inspired by other Redis clients like [@upstash/redis](https://github.com/upstash/upstash-redis) and [redis-py](https://github.com/redis/redis-py),
-the goal of this SDK is to provide a simple way to use Redis over the [Upstash REST API](https://docs.upstash.com/redis/features/restapi).
+Inspired by other Redis clients like [@khulnasoft/redis](https://github.com/khulnasoft-lab/redis-sdk) and [redis-py](https://github.com/redis/redis-py),
+the goal of this SDK is to provide a simple way to use Redis over the [Khulnasoft REST API](https://docs.khulnasoft.com/redis/features/restapi).
 
 The SDK is currently compatible with Python 3.8 and above.
 
 <!-- toc -->
 
-- [Upstash Redis Python SDK](#upstash-redis-python-sdk)
+- [Khulnasoft Redis Python SDK](#redis-sdk-python-sdk)
 - [Quick Start](#quick-start)
   - [Install](#install)
     - [PyPI](#pypi)
@@ -34,34 +34,34 @@ The SDK is currently compatible with Python 3.8 and above.
 
 ### PyPI
 ```bash
-pip install upstash-redis
+pip install redis-sdk
 ```
 
 ## Usage
-To be able to use upstash-redis, you need to create a database on [Upstash](https://console.upstash.com/)
-and grab `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` from the console.
+To be able to use redis-sdk, you need to create a database on [Khulnasoft](https://console.khulnasoft.com/)
+and grab `REDIS_SDK_REST_URL` and `REDIS_SDK_REST_TOKEN` from the console.
 
 ```python
 # for sync client
-from upstash_redis import Redis
+from redis_sdk import Redis
 
-redis = Redis(url="UPSTASH_REDIS_REST_URL", token="UPSTASH_REDIS_REST_TOKEN")
+redis = Redis(url="REDIS_SDK_REST_URL", token="REDIS_SDK_REST_TOKEN")
 
 # for async client
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 
-redis = Redis(url="UPSTASH_REDIS_REST_URL", token="UPSTASH_REDIS_REST_TOKEN")
+redis = Redis(url="REDIS_SDK_REST_URL", token="REDIS_SDK_REST_TOKEN")
 ```
 
 Or, if you want to automatically load the credentials from the environment:
 
 ```python
 # for sync use
-from upstash_redis import Redis
+from redis_sdk import Redis
 redis = Redis.from_env()
 
 # for async use
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 redis = Redis.from_env()
 ```
 
@@ -71,7 +71,7 @@ to be reused while your function is still hot.
 Running commands might look like this:
 
 ```python
-from upstash_redis import Redis
+from redis_sdk import Redis
 
 redis = Redis.from_env()
 
@@ -81,7 +81,7 @@ def main():
 
 # or for async context:
 
-from upstash_redis.asyncio import Redis
+from redis_sdk.asyncio import Redis
 
 redis = Redis.from_env()
 
@@ -117,14 +117,14 @@ redis.execute(command=["XLEN", "test_stream"])
 
 # Encoding
 Although Redis can store invalid JSON data, there might be problems with the deserialization.
-To avoid this, the Upstash REST proxy is capable of encoding the data as base64 on the server and then sending it to the client to be
+To avoid this, the Khulnasoft REST proxy is capable of encoding the data as base64 on the server and then sending it to the client to be
 decoded. 
 
 For very large data, this can add a few milliseconds in latency. So, if you're sure that your data is valid JSON, you can set
 `rest_encoding` to `None`.
 
 # Retry mechanism
-upstash-redis has a fallback mechanism in case of network or API issues. By default, if a request fails it'll retry once, 3 seconds 
+redis-sdk has a fallback mechanism in case of network or API issues. By default, if a request fails it'll retry once, 3 seconds 
 after the error. If you want to customize that, set `rest_retries` and `rest_retry_interval` (in seconds).
 
 # Contributing
@@ -132,11 +132,11 @@ after the error. If you want to customize that, set `rest_retries` and `rest_ret
 ## Preparing the environment
 This project uses [Poetry](https://python-poetry.org) for packaging and dependency management. Make sure you are able to create the poetry shell with relevant dependencies.
 
-You will also need a database on [Upstash](https://console.upstash.com/).
+You will also need a database on [Khulnasoft](https://console.khulnasoft.com/).
 
 ## Running tests
 To run all the tests, make sure the poetry virtual environment activated with all 
-the necessary dependencies. Set the `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` environment variables and run:
+the necessary dependencies. Set the `REDIS_SDK_REST_URL` and `REDIS_SDK_REST_TOKEN` environment variables and run:
 
 ```bash
 poetry run pytest

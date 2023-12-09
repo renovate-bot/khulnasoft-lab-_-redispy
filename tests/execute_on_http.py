@@ -4,10 +4,10 @@ from typing import Any, Dict
 import requests
 from aiohttp import ClientSession
 
-from upstash_redis.typing import RESTResultT
+from redis_sdk.typing import RESTResultT
 
-url: str = environ["UPSTASH_REDIS_REST_URL"]
-token: str = environ["UPSTASH_REDIS_REST_TOKEN"]
+url: str = environ["REDIS_SDK_REST_URL"]
+token: str = environ["REDIS_SDK_REST_TOKEN"]
 
 headers: Dict[str, str] = {"Authorization": f"Bearer {token}"}
 

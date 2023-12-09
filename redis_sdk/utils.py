@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Literal, Optional
 
-from upstash_redis.typing import FloatMinMaxT
+from redis_sdk.typing import FloatMinMaxT
 
 
 @dataclass

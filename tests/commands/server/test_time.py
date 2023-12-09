@@ -1,4 +1,4 @@
-from upstash_redis import Redis
+from redis_sdk import Redis
 
 
 def test_time(redis: Redis):

@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "upstash-redis"
+name = "redis-sdk"
 version = "1.0.0"
-description = "Serverless Redis SDK from Upstash"
+description = "Serverless Redis SDK from Khulnasoft"
 license = "MIT"
-authors = ["Upstash <support@upstash.com>", "Zgîmbău Tudor <tudor.zgimbau@gmail.com>"]
-maintainers = ["Upstash <support@upstash.com>"]
+authors = ["Khulnasoft <support@khulnasoft.com>", "Md Sulaiman <infosulaimanbd@gmail.com>"]
+maintainers = ["Khulnasoft <support@khulnasoft.com>"]
 readme = "README.md"
-repository = "https://github.com/upstash/redis-python"
-keywords = ["Upstash Redis", "Serverless Redis"]
+repository = "https://github.com/khulnasoft-lab/redispy"
+keywords = ["Khulnasoft Redis", "Serverless Redis"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -26,7 +26,7 @@ classifiers = [
     "Topic :: Database :: Front-Ends",
     "Topic :: Software Development :: Libraries",
 ]
-packages = [{ include = "upstash_redis" }]
+packages = [{ include = "redis_sdk" }]
 
 [tool.poetry.dependencies]
 python = "^3.8"

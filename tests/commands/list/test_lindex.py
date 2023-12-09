@@ -1,6 +1,6 @@
 from pytest import fixture
 
-from upstash_redis import Redis
+from redis_sdk import Redis
 
 
 @fixture(autouse=True)

@@ -1,7 +1,7 @@
 from pytest import mark, raises
 
-from upstash_redis.asyncio import Redis
-from upstash_redis.utils import GeoSearchResult
+from redis_sdk.asyncio import Redis
+from redis_sdk.utils import GeoSearchResult
 
 
 @mark.asyncio
